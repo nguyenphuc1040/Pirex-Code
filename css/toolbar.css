@@ -1,0 +1,159 @@
+.tool-bar-vertical{
+    background: var(--color-gray-toolbar);
+    padding-top: 10px;
+}
+.tool-bar-vertical .btn{
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.tool-bar-vertical .btn svg{
+    height: 30px;
+    width: 30px;
+}
+.tool-bar-vertical .btn:hover svg{
+    fill: var(--color-gray-hover);
+}
+.tool-bar-horizontal{
+    background: var(--color-tabbar-editor);
+}
+.setting{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 30px;
+}
+.tabbar-editor{
+    background: var(--color-tabbar-editor);
+    height: 100%;
+    display: flex;  
+}
+.tabbar-editor *{
+    transition-duration: .2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.tab-btn{
+    height:100%;
+    width: fit-content;
+    min-width: 150px;
+    background-color:var(--color-editor);
+    color: rgb(119, 119, 119);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0 15px 0 10px;
+    user-select: none;
+    cursor: pointer;
+    border: solid #000;
+    border-width: 0 1px 0 0;
+}
+.tab-btn:hover{
+    background-color: var(--color-hover-tab) !important;
+}
+.tab-btn *{
+    margin-left: 8px;
+ 
+}
+.tab-btn svg {
+    height: 17px;
+    width: 17px;
+    border-radius: 15px;
+}
+.tab-btn svg:hover{
+    background-color:var(--color-hover-tab);
+}
+.new-tab-btn{
+    height:38px;
+    width: 38px;
+}
+.new-tab-btn:hover{
+    background-color: var(--color-hover-tab);
+}
+.new-tab-btn svg{
+    height: 25px;
+    width: 25px;
+    margin: auto;
+    fill: var(--color-gray-hover);
+}
+.save-point{
+    height:10px;
+    width:10px;
+    border-radius: 10px;
+    background-color: #999999;
+    margin-left: 15px;
+}
+.bottom-bar{
+    height: 100%;
+    background-color: var(--color-gray-bottom);
+    display: flex;
+    justify-content: space-between;
+    
+}
+.theme-mode {
+    height: 100%;
+    background-color:rgb(51, 51, 51);
+    color: white;
+    clip-path: polygon(0% 0%, 88% 0%, 100% 50%, 88% 100%, 0% 100%);
+}
+.theme-mode:hover{
+    background-color:rgba(51, 51, 51, 0.445);
+}
+.bottom-left-group , .bottom-right-group{
+    height: 100%;
+    display: flex;
+}
+.bottom-left-group div{
+    cursor: pointer;
+    width: fit-content;
+    padding: 0px 25px 0 13px;
+    display: flex;
+    align-items: center;
+}
+#update-bottom-checking{
+    display: none;
+}
+@keyframes rotate-update {
+    0% {transform: rotateZ(0)}
+
+    100% {transform: rotateZ(360deg)}
+}
+#update-bottom-checking svg{
+    animation: rotate-update 1s infinite linear;
+}
+.bottom-right-group-text{
+    width: fit-content;
+    padding: 7px 13px 0 13px;
+    cursor: pointer;
+    height: 100%;
+}
+.polygonx {
+    padding-right: 35px !important;
+    clip-path: polygon(0 0, 100% 0%, 84% 100%, 0% 100%);
+}
+.terminal-btn{
+    padding-left: 10px;
+    margin-top: 1px;
+    height: 100%;
+    width: 100px;
+    background-color: var(--color-theme);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    clip-path: polygon(30% 0, 100% 0%, 100% 100%, 0% 100%);
+}
+.terminal-btn img{
+    height: 18px;
+    width: auto;
+}
+.terminal-btn:hover{
+    background-color: var(--color-theme-hover) !important;
+}
+
+.bottom-right-group .bottom-right-group-text:hover{
+    background-color: var(--color-hover-tab);
+}
+

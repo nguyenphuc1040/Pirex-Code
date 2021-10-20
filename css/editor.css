@@ -1,0 +1,49 @@
+.editor-code {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    line-height: var(--line-Height);
+    display: block;
+    font-size: var(--font-App);
+    font-family: var(--font-Family-App) !important;
+    
+}
+
+.editor-container{
+    display: grid;
+    grid-template-columns: 60px 0 auto;
+}
+.editor-container-code {
+    display: grid;
+    /* grid-template-columns: auto; */
+    grid-template-rows: 38px 10px auto 300px;
+}
+.editor-container-code:hover ::-webkit-scrollbar-thumb{
+    background: var(--color-scrollbar);
+    opacity: .5;
+}
+.path-file-folder{
+    background-color: var(--color-editor);
+}
+#code-editor{
+    display: grid;
+    grid-template-rows: 1fr;
+    background-color: var(--color-gray);
+}
+
+#drop-file-open{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    background-color:rgba(116, 116, 116, 0.5);
+    z-index: 10;
+    transition: .3s;
+}
+.ace_editor.ace_autocomplete {
+    font-size: 17px;  
+}

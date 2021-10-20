@@ -1,0 +1,26 @@
+{
+  "name": "PrexCode",
+  "version": "0.0.1",
+  "main": "main.js",
+  "author": "nguyenphuc1040",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "electron": "^13.1.7"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "npx electron-packager ./ PrexCode --platform=win32 --arch=x64 --icon=assets/icon.ico",
+    "rebuild": "electron-rebuild"
+  },
+  "dependencies": {
+    "electron-json-storage": "^4.5.0",
+    "electron-packager": "^15.4.0",
+    "electron-rebuild": "^3.2.3",
+    "es6": "^0.0.7",
+    "mousetrap": "^1.6.5",
+    "node-pty": "^0.10.1",
+    "uaup-js": "latest",
+    "v8-compile-cache": "^2.3.0"
+  }
+}

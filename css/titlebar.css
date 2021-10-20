@@ -1,0 +1,94 @@
+.title-bar{
+    position: relative;
+    background: var(--color-gray-title);
+    width: 100%;
+    display: flex;
+    /* grid-template-columns: 35px auto; */
+    /* grid-template-columns: 35px auto 140px; */
+}
+
+.logo{
+    width: 60px;
+    background-color:var(--color-theme);
+    clip-path: polygon(0% 0%, 75% 0%, 100% 53%, 75% 100%, 0% 100%);
+}
+.logo img{
+    height: 20px;
+    width: auto;
+    margin: 8.5px 0 0 12px;
+}
+.btn-title-bar{
+    z-index:1000000000;
+    height: 35px;
+    display: flex;
+    justify-self: flex-end;
+    padding: 6px 10px 0 0;
+    /* position: relative; */
+    /* left: calc(100vw - 120px); */
+}
+.btn-title-bar button {
+    z-index:1000000001;
+    border: none;
+    color: white;
+}
+
+.minimize, .maximize, .exit-app{
+    z-index:1000000001;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    background: transparent;
+}
+.exit-app{
+    background:rgb(197, 25, 25);
+    /* clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%); */
+    clip-path: circle(28% at 50% 50%);
+}
+.maximize , .minimize{
+    /* clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%); */
+    clip-path: circle(28% at 50% 50%);
+}
+.minimize {
+    background:#129e84;
+}
+.maximize {
+    background:#c47814
+}
+.btn-title-bar svg{
+    height: 15px;
+    width: 15px;
+}
+
+.minimize:hover {
+    background:#00ffd0;
+}
+.maximize:hover {
+    background:#ff9100
+}
+.exit-app:hover{
+    background:rgb(255, 0, 0);
+}
+.title-text{    
+    display: flex;
+    width: calc(100vw - 190px)
+}
+
+.title-box-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 40px);
+    clip-path: polygon(92% 0%, 100% 50%, 92% 100%, 0% 100%, 6% 50%, 0% 0%);
+}
+
+.title-box-container-before{
+    width: 40px;
+    background-color:var(--color-gray);
+    clip-path: polygon(65% 0%, 100% 50%, 65% 100%, 0% 100%, 40% 50%, 0% 0%);
+}
+#divide-title{
+    background: var(--color-gray-title);
+}
