@@ -2,6 +2,7 @@
     --font-App: 15px;
     --font-Family-App: 'Fira Code Retina' ,'Consolas', 'Courier New', monospace;
     --line-Height: 22px;
+    --terminal-width: 600px;
 
     --color-theme: #c72c21;
     --color-theme-1: #981396;
@@ -47,18 +48,19 @@
 ::-webkit-scrollbar-thumb {
     opacity: 0;
     border-radius: 100px;
+
 }
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-scrollbar-hover) !important; 
 }
-input:focus {
+*:focus {
     outline: none;
 }
 body {
     padding: 0;
     margin: 0;
     overflow:hidden;
-    background:black;
+    background:var(--color-editor);
     font-family: "Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
 body *{
@@ -92,25 +94,9 @@ body *{
     overflow: hidden;
 }
 
-.terminal-container ::-webkit-scrollbar-thumb{
-    opacity: 1 !important;
-}
-#terminal-container {
-    /* position: fixed; */
-    /* bottom: 35px;
-    right: 3px; */
-    z-index: 10000000;
-    overflow: hidden;
-    padding: 30px 25px 20px 20px;
-    background-color: var(--color-gray-toolbar);
-}
+
 
 .font-arial{
     font-family: "Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
     font-weight: normal;
-}
-#terminal {
-     /* height:calc(100vh - 105px ); */
-    width:100%;
-    height: 280px;
 }

@@ -27,8 +27,14 @@
 }
 .tabbar-editor{
     background: var(--color-tabbar-editor);
-    height: 100%;
-    display: flex;  
+    height: fit-content;
+    display: flex; 
+    width: 100%;
+    overflow-x:auto; 
+}
+.tabbar-editor::-webkit-scrollbar {
+    width: 3px !important;
+    height: 3px !important;
 }
 .tabbar-editor *{
     transition-duration: .2s;
@@ -67,7 +73,7 @@
 }
 .new-tab-btn{
     height:38px;
-    width: 38px;
+    min-width: 38px;
 }
 .new-tab-btn:hover{
     background-color: var(--color-hover-tab);

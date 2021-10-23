@@ -19,7 +19,9 @@
     "electron-rebuild": "^3.2.3",
     "es6": "^0.0.7",
     "mousetrap": "^1.6.5",
-    "node-pty": "^0.10.1",
+    "shelljs": "^0.8.4",
+    "split-grid": "^1.0.11",
+    "split.js": "^1.6.4",
     "uaup-js": "latest",
     "v8-compile-cache": "^2.3.0"
   }

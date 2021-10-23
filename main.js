@@ -1,9 +1,7 @@
 require('v8-compile-cache');
 const {app, BrowserWindow,ipcMain} = require('electron')
 const path = require('path')
-const pty = require("node-pty");
 const os = require("os");
-var shell = os.platform() === "win32" ? "powershell.exe" : "bash";
 
 function createWindow () {
   // Create the browser window.
@@ -28,21 +26,7 @@ function createWindow () {
   // mainWindow.removeMenu();
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
-  var ptyProcess = pty.spawn(shell, [], {
 
-    cols: 80,
-    rows: 30,
-    cwd: process.env.HOME,
-    env: process.env
-  });
-  
-  ptyProcess.on('data', function(data) {
-    mainWindow.webContents.send("terminal.incomingData", data);
-  });
-  ipcMain.on("terminal.keystroke", (event, key) => {
-    ptyProcess.write(key);
-  });
-  
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

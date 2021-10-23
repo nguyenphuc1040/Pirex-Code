@@ -1,6 +1,7 @@
 
 
 ace.require("ace/ext/language_tools");
+
 // ace.require("ace/keybindings/vim");
 var editor = ace.edit("editor");
 const path = require('path')
@@ -79,7 +80,7 @@ function readFile(path,index){
             editor.getSession().setUndoManager(new ace.UndoManager())
         }, 0);
         pathTab[index] = path;
-        editor.focus();
+        // editor.focus();
         editor.gotoLine(1);
         processFilePath(path,index);
         // watchFile(path,index,true);
@@ -186,7 +187,7 @@ var programLangText = {
 }
 var programLangMode = {
     ".js" : "javascript",
-    ".cs" : "csharp",
+    ".cs" : "c_cpp",
     ".jsx" : "jsx",
     ".ts" : "typescript",
     ".tsx" : "tsx",
@@ -209,18 +210,19 @@ function processFilePath(pathFile,index,tabPress = false){
     titleNameFile.textContent = fileNameTitle + " - Prex Code";
     if (!tabPress) {
         tabName[index].textContent = fileNameTitle;
-        changeExtFile(pathFile)
+      
     }
+    changeExtFile(pathFile,tabPress);
 }
 
-function changeExtFile(pathFile){
+function changeExtFile(pathFile,tabPress = false) { 
     const lang = path.extname(pathFile);
     if (programLangText[lang]===undefined){
         programLang.textContent = "Plain Text";
-        editor.session.setMode("ace/mode/text");
+        if (!tabPress) editor.session.setMode("ace/mode/text");
     } else {
         programLang.textContent = programLangText[lang];
-        editor.session.setMode("ace/mode/" + programLangMode[lang]);
+        if (!tabPress) editor.session.setMode("ace/mode/" + programLangMode[lang]);
     }
 }
 
@@ -325,7 +327,7 @@ function activeEditor(t,e,i){
     if (tabElement[i]!==undefined && tabElement[i]!==null) {
         editor.setSession(tabEditor[i]);
         tabElement[i].style.backgroundColor = "var(--color-editor)";
-
+        // const lang = pathTab.extname(pathFile);
     }
     if (tabElement[currentIndex]!==null && tabElement[currentIndex]!==undefined) tabElement[currentIndex].style.backgroundColor = "var(--color-tabbar-editor)";
     currentEditor = e;
@@ -389,3 +391,14 @@ parentE.addEventListener('drop',function(event){
     }
     parentE.style.opacity = '1';
 },false)
+
+editorDoc.addEventListener('click',function(event){
+    editorDoc.focus();
+})
+
+const scrollTabbarEditor = document.getElementById("tabbar-editor");
+
+scrollTabbarEditor.addEventListener("wheel", (evt) => {
+    evt.preventDefault();
+    scrollTabbarEditor.scrollLeft += evt.deltaY;
+});

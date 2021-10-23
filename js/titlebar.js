@@ -10,7 +10,6 @@ quit.addEventListener("click",quitApp)
 function minimizeApp(){
     var window = remote.getCurrentWindow();
     window.minimize();
-    // window.focus();
 }
 
 function maximizeApp(){

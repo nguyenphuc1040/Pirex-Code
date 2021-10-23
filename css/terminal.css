@@ -1,0 +1,96 @@
+@font-face {
+    font-family: Cascadia;
+    src: url("../js/components/Utility/Fonts/CascadiaCode.ttf");
+}
+
+#terminal-container{
+    
+}
+.terminal {
+    height: calc(100vh - 108px);
+    background-color: var(--color-editor);
+    padding: 13px 0 5px 5px;
+    font-family: Cascadia, monospace;
+}
+.terminal-container-title-bar{
+    position: relative;
+    height:37.5px;
+    width:calc( 100% + 7px); 
+    background-color: var(--color-gray-toolbar);
+    margin-left: -5px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px 0 10px
+}
+.btn-close-terminal{
+    height:25px;
+    width:25px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-close-terminal:hover{
+    background: var(--color-hover-tab);
+}
+
+.window {
+    height: 100%;
+    width: 100%;
+    color: var(--color-text-main);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto;
+    font-size: 16px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: text;
+
+}
+.window::after {
+    display: inline-block;
+    vertical-align: -1em;
+    width: 0.7em;
+    height: 0.2em;
+    background: transparent;
+    content: " ";
+    margin-left: 3px;
+    border: 1px solid var(--color-text-main);
+}
+
+.window:focus::after{
+    background: var(--color-text-main);
+    animation: blink 940ms steps(1) infinite;
+}
+
+
+@keyframes blink {
+    50% {opacity: 0;}
+}
+
+.window-appicon {
+    background-size: 25px !important;
+}
+.container-after-titlebar {
+    top: 0 !important;
+}
+
+.gutter-col {
+    cursor:e-resize;
+    background-color: transparent !important;
+}
+
+.gutter-col div{
+    height:100%;
+    width: 2px;
+    background-color: #74747470;
+    transition: .3s;
+    margin-left: 2px;
+}
+
+.gutter-col:hover div{
+    width: 5px;
+    margin-left: 0;
+}

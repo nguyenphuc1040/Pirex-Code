@@ -13,13 +13,13 @@
 
 .editor-container{
     display: grid;
-    grid-template-columns: 60px 0 auto;
+    grid-template-columns: 60px 0 1fr 0 0;
 }
 .editor-container-code {
     display: grid;
-    /* grid-template-columns: auto; */
-    grid-template-rows: 38px 10px auto 300px;
+    grid-template-rows: 38px 10px auto;
 }
+
 .editor-container-code:hover ::-webkit-scrollbar-thumb{
     background: var(--color-scrollbar);
     opacity: .5;
