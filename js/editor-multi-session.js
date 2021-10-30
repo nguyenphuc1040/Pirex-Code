@@ -1,5 +1,4 @@
 
-
 ace.require("ace/ext/language_tools");
 
 // ace.require("ace/keybindings/vim");
@@ -10,7 +9,6 @@ var EditSession = ace.EditSession;
 var editorDoc = document.getElementById('editor');
 // editor.setKeyboardHandler("ace/keyboard/vim");
 editor.setTheme("ace/theme/one_dark");
-// editor.focus();
 editor.setOptions({
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true,
@@ -18,6 +16,7 @@ editor.setOptions({
     showLineNumbers: true,
     tabSize: 11
 });
+var pathTabText = document.getElementById('path-file-folder')
 
 editor.renderer.setScrollMargin(0, window.innerHeight-140,0,20);
 
@@ -80,7 +79,7 @@ function readFile(path,index){
             editor.getSession().setUndoManager(new ace.UndoManager())
         }, 0);
         pathTab[index] = path;
-        // editor.focus();
+        editor.focus();
         editor.gotoLine(1);
         processFilePath(path,index);
         // watchFile(path,index,true);
@@ -96,7 +95,6 @@ function readFile(path,index){
                         editor.setSession(tabEditor[index]);
                         editor.session.setValue(data);
                         pathTab[index] = path;
-                        editor.gotoLine(1);
                         changeToCurrentSession();
                     }
                     
@@ -109,6 +107,7 @@ function changeToCurrentSession(){
     editor.setSession(tabEditor[currentIndex]);
 }
 function saveFile(){    
+
     var data = editor.getValue();
     var index = currentIndex;
     if (data===valueEditor[currentIndex]) return;
@@ -123,6 +122,7 @@ function saveFile(){
                     if(err) {
                         return console.log(err);
                     }
+                    editor.focus();
                     tabSavePoint[currentIndex].style.background = 'transparent';
                     valueEditor[currentIndex] = data;
                     pathTab[currentIndex] = path;
@@ -140,7 +140,6 @@ function saveFile(){
                                     editor.setSession(tabEditor[index]);
                                     editor.session.setValue(data);
                                     pathTab[index] = path;
-                                    editor.gotoLine(1);
                                     changeToCurrentSession();
                                 }
                                 
@@ -150,8 +149,10 @@ function saveFile(){
                 }); 
                 
             }   
+            editor.focus();
             
         }).catch(err => {
+            editor.focus();
         })
     } else {
         fs.writeFile(pathTab[currentIndex], data , function(err) {
@@ -184,6 +185,7 @@ var programLangText = {
     ".css" : " CSS ",
     ".php" : " PHP ",
     ".svg" : " HTML ",
+    ".sql" : " SQL ",
 }
 var programLangMode = {
     ".js" : "javascript",
@@ -200,18 +202,18 @@ var programLangMode = {
     ".css" : "css",
     ".php" : "php",
     ".svg" : "html",
-    ".fxml" : " html ",
-    ".xml" : " html ",
+    ".fxml" : "html",
+    ".xml" : " html",
+    ".sql" : "sql" ,
 }
 
 function processFilePath(pathFile,index,tabPress = false){
     if (pathFile===undefined || pathFile===null) return;
     fileNameTitle = path.basename(pathFile);
     titleNameFile.textContent = fileNameTitle + " - Prex Code";
-    if (!tabPress) {
-        tabName[index].textContent = fileNameTitle;
-      
-    }
+    if (pathFile.indexOf(':')!==-1) pathTabText.textContent = '\t'+ pathFile.replaceAll('\\','>');
+        else pathTabText.textContent = '>_';
+    if (!tabPress) tabName[index].textContent = fileNameTitle;
     changeExtFile(pathFile,tabPress);
 }
 
@@ -327,7 +329,7 @@ function activeEditor(t,e,i){
     if (tabElement[i]!==undefined && tabElement[i]!==null) {
         editor.setSession(tabEditor[i]);
         tabElement[i].style.backgroundColor = "var(--color-editor)";
-        // const lang = pathTab.extname(pathFile);
+        
     }
     if (tabElement[currentIndex]!==null && tabElement[currentIndex]!==undefined) tabElement[currentIndex].style.backgroundColor = "var(--color-tabbar-editor)";
     currentEditor = e;
@@ -358,6 +360,7 @@ function closeTab(a,index,boo=false){
 }
 function disableEditor(isDis){
     editorDoc.style.display= isDis ? "none" : "block";
+    pathTabText.textContent = '\t>_';
 }
 
 function hightLight(){
@@ -369,7 +372,9 @@ fileStartup();
 function fileStartup(){
     if (remote.process.argv[1]==='.' || remote.process.argv.length<2){
         newFile(null);
+        changeDir(os.homedir())
     } else {
+        changeDir(path.dirname(remote.process.argv[1]))
         newFile(remote.process.argv[1])
     }
 }
@@ -402,3 +407,8 @@ scrollTabbarEditor.addEventListener("wheel", (evt) => {
     evt.preventDefault();
     scrollTabbarEditor.scrollLeft += evt.deltaY;
 });
+
+const FocusEditor = () => {
+    terminalInput.blur();
+    editorDoc.focus();
+}

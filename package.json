@@ -1,5 +1,5 @@
 {
-  "name": "PrexCode",
+  "name": "PirexCode",
   "version": "0.0.1",
   "main": "main.js",
   "author": "nguyenphuc1040",
@@ -10,18 +10,16 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "npx electron-packager ./ PrexCode --platform=win32 --arch=x64 --icon=assets/icon.ico",
+    "build": "npx electron-packager ./ PirexCode --platform=win32 --arch=x64 --icon=assets/iconpx.ico",
     "rebuild": "electron-rebuild"
   },
   "dependencies": {
     "electron-json-storage": "^4.5.0",
     "electron-packager": "^15.4.0",
     "electron-rebuild": "^3.2.3",
-    "es6": "^0.0.7",
     "mousetrap": "^1.6.5",
     "shelljs": "^0.8.4",
     "split-grid": "^1.0.11",
-    "split.js": "^1.6.4",
     "uaup-js": "latest",
     "v8-compile-cache": "^2.3.0"
   }

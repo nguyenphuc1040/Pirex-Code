@@ -1,3 +1,5 @@
+
+
 .editor-code {
     position: relative;
     top: 0;
@@ -13,20 +15,19 @@
 
 .editor-container{
     display: grid;
+    overflow: hidden;
     grid-template-columns: 60px 0 1fr 0 0;
 }
 .editor-container-code {
     display: grid;
-    grid-template-rows: 38px 10px auto;
+    grid-template-rows: 38px 25px auto;
 }
 
 .editor-container-code:hover ::-webkit-scrollbar-thumb{
     background: var(--color-scrollbar);
     opacity: .5;
 }
-.path-file-folder{
-    background-color: var(--color-editor);
-}
+
 #code-editor{
     display: grid;
     grid-template-rows: 1fr;
@@ -46,4 +47,18 @@
 }
 .ace_editor.ace_autocomplete {
     font-size: 17px;  
+}
+
+.path-file-folder{
+    background-color: var(--color-editor);
+    font-size:13px;
+    color:rgb(119, 119, 119);
+    font-weight: 500;
+   
+    margin-left: 20px;
+}
+.path-file-folder-container{
+    padding: 2px 0 0 0px;
+    text-overflow: hidden;
+    overflow: hidden;
 }

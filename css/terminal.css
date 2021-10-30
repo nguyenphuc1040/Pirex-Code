@@ -43,7 +43,7 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-y: auto;
-    font-size: 16px;
+    font-size: var(--font-App);
     padding-left: 5px;
     padding-right: 5px;
     cursor: text;
@@ -93,4 +93,16 @@
 .gutter-col:hover div{
     width: 5px;
     margin-left: 0;
+}
+
+#terminal-shell{
+    margin-left: 20px;
+    height: 100%;
+    width: fit-content;
+    padding: 10px 20px 0 20px;
+    font-weight: 500;
+    font-size: 13px;
+    border-bottom: 2px solid var(--color-text-main);
+    color: var(--color-text-main);
+    cursor: pointer;
 }

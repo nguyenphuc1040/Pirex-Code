@@ -9,23 +9,23 @@ function createWindow () {
     width: 800,
     height: 600,
     minWidth: 800,
-    minHeight: 600,
+    minHeight: 300,
     frame: false,
     webSecurity: false,
-    icon: __dirname + '/assets/icon-official.png',
+    icon: __dirname + '/assets/pirexcode.png',
     webPreferences: {
-      // devTools: false,
+      devTools: false,
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
-      preload: path.join(__dirname, 'preload.js'),
+      // preload: path.join(__dirname, 'preload.js'),
     }
   })
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
-  // mainWindow.removeMenu();
+  mainWindow.removeMenu();
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
 }
 // This method will be called when Electron has finished

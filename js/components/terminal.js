@@ -1,9 +1,9 @@
-
+ 
 var Mousetrap = require('mousetrap');
 // const os = require('os');
 const electron = require("electron").remote;
 const commands = require("./js/components/commands.class").cmdlist;
-const spawn = require("child_process").spawn;
+const spawn = require("child_process").exec;
 var shell_ = require('shelljs');
 const { clipboard } = require('electron');
 // UTILITY
@@ -19,77 +19,75 @@ function escapeHTML(html) {
 
 // END UTILITY
 
-const shell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
+var shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 
-if (shell === "powershell.exe"){
-    document.querySelector("title").append(" - Powershell");
-}
-else {
-    document.querySelector("title").append(" - Bash");
-}
 
 const termwindow = $(".window");
 const termwindow_ = document.querySelector(".window"); // This is here to get the clear command working
 
-const pathdir = "["+ os.userInfo().username + "@" + os.hostname + "]";
-const prompt_ = ">";
-
-// Get online status (for external links)
-let onlinestatus = navigator.onLine ? span("status-success", "Online" + "\n") : span("status-fail", "Offline" + "\n"); // gets whether app is online or not
-let status = span("title", "Emulator Status: ") + onlinestatus;
-
-// Get release version
-let version = electron.app.getVersion();
-let appversion = span("title", "Termello - v" + version);
-
 var command = "";
 const commandHistory = [''];
 var historyIndex = 0;
+var isProcess = false;
+var child;
+var isClientEnter = false;
+function changeDir(arg){
+    shell_.cd(arg);
+}
+RunTerminal();
+function RunTerminal(){
+    child = spawn(shell);
+    // child.stdout.pipe(process.stdout);
+    // child.stdin.setEncoding ("utf8")
+    child.stdout.setEncoding ("utf8")
+    // child.stderr.setEncoding ("utf8")
+    child.stdin.on('data', function(data){
+        console.log(data);
+    });
+    
+    child.stdout.on("data",function(data){
+        termwindow.append(escapeHTML(data.toString()));
+        termwindow_.scrollBy({
+            top: termwindow_.scrollHeight,
+            behavior: "smooth"
+        })
+    });
+    child.stderr.on("data",(data)=>{
+        
+        termwindow.append(span("status-fail", escapeHTML(data.toString()) + "\n"));
+        termwindow_.scrollBy({
+            top: termwindow_.scrollHeight,
+            behavior: "smooth"
+        })
+    });
+    
+    child.on("exit",function(){
+        CloseTerminal(true);
+    })
+    
+}
 
 function processcommand(){
+    if (command!== '') termwindow.append("\n");
     const args = command.split(" ");
     const typedCommand = commands.find(cmd => cmd.name === args[0]);
     args.shift();
-        // Pass the command to the shell unless "clear" or "cd" is typed
-    // Then execute the custom functions
+    console.log(typedCommand);
     if (typedCommand == null){
-        let child;
-        if (shell === "powershell.exe"){
-            child = spawn(shell, [command]);
-        }
-        else {
-            child = spawn(command, {shell: true});
-        }
-        child.stdout.on("data",function(data){
-            termwindow.append(escapeHTML(data.toString()) + "\n");
-            termwindow_.scrollBy({
-                top: termwindow_.scrollHeight,
-                behavior: "smooth"
-            })
-        });
-        child.stderr.on("data",function(data){
-  
-            termwindow.append(span("status-fail", escapeHTML(data.toString()) + "\n"));
-            termwindow_.scrollBy({
-                top: termwindow_.scrollHeight,
-                behavior: "smooth"
-            })
-        });
-        child.on("exit",function(){
-            displayprompt();
-        });
-        child.stdin.end();
+        child.stdin.write(command+'\n');
     }
     else {
+        if (typedCommand.name === 'cd') {
+            child.stdin.write(command+'\n');
+        } 
         typedCommand.function(args);
-        displayprompt();
     }
-
-    // Add to command history and clean up
+    // // Add to command history and clean up
 	commandHistory.splice(1, 0, command);
     command = "";
     historyIndex = 0;
     commandHistory[0] = '';
+   
 }
 
 // Functions for displaying to the terminal
@@ -97,6 +95,7 @@ function processcommand(){
 function appendcommand(str){
     termwindow.append(str);
     command += str;
+    // processcommand()
 }
 
 function clearcommand(){
@@ -116,8 +115,9 @@ const terminalInput = document.getElementById('terminal-input');
 terminalInput.addEventListener("keydown", (e) => {
     e = e || window.Event;
     const key = typeof e.which === "number" ? e.which : e.key;
-    if (key == 8) {
+    if (key === 8) {
         e.preventDefault();
+        // appendcommand('\b')
         if (command !== "" && command !== "\n") {
             erase(1);
         }
@@ -131,6 +131,7 @@ terminalInput.addEventListener("keydown", (e) => {
         e.preventDefault();
         // Move up or down the history
         // Up key
+        appendcommand(key)
         if (key === 38) {
             if(historyIndex < commandHistory.length - 1) historyIndex++;
         } 
@@ -164,6 +165,7 @@ terminalInput.addEventListener("keydown", (e) => {
                 appendcommand(clipboard.readText());
         }
     }
+   
 })
 
 // Allows pasting with the "right" mouse button
@@ -179,12 +181,15 @@ terminalInput.addEventListener("keypress", function(e){
     let key = typeof e.which === "number" ? e.which : e.key;
     switch (key){
         case 13:
-            termwindow.append("\n");
+            // termwindow.append("\n");
+            // processcommand()
+            isClientEnter = true;
             if (command.trim().length !== 0){
                 processcommand();
             }
             else {
-                displayprompt();
+                processcommand();
+                // displayprompt();
             }
             termwindow_.scrollBy({
                 top: termwindow_.scrollHeight,
@@ -203,17 +208,7 @@ terminalInput.addEventListener("keypress", function(e){
 })
 // End typing
 
-// Displays prompt
-function displayprompt(){
-    termwindow.append(span("pathdir", process.cwd()));
-    termwindow.append(span("prompt", prompt_));
-    termwindow_.scrollBy({
-        top: termwindow_.scrollHeight,
-        behavior: "smooth"
-    })
-}
 
-// Some startup stuffs
 function startterminal(){
     termwindow.append(span("title", "Running: " + shell + "\n"));
     displayprompt();

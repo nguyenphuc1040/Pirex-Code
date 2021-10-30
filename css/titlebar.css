@@ -9,13 +9,13 @@
 
 .logo{
     width: 60px;
-    background-color:var(--color-theme);
+    background-color:var(--color-gray);
     clip-path: polygon(0% 0%, 75% 0%, 100% 53%, 75% 100%, 0% 100%);
 }
 .logo img{
     height: 20px;
     width: auto;
-    margin: 8.5px 0 0 12px;
+    margin: 10px 0 0 12px;
 }
 .btn-title-bar{
     z-index:1000000000;

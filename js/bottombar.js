@@ -3,9 +3,9 @@ function showItem(){
 }
 
 function resetZoom(){
-    webFrame.setZoomLevel(-1);
+    webFrame.setZoomLevel(0);
     var data = storage.getSync('setting');
-    data.editorZoom = -1;
+    data.editorZoom = 0;
     writeSettingJson(data);
 }
 

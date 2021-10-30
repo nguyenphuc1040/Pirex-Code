@@ -93,6 +93,7 @@
 }
 .bottom-bar{
     height: 100%;
+    width: 100vw;
     background-color: var(--color-gray-bottom);
     display: flex;
     justify-content: space-between;
@@ -100,12 +101,12 @@
 }
 .theme-mode {
     height: 100%;
-    background-color:rgb(51, 51, 51);
+    background-color:rgba(51, 51, 51, 0.445);
     color: white;
     clip-path: polygon(0% 0%, 88% 0%, 100% 50%, 88% 100%, 0% 100%);
 }
 .theme-mode:hover{
-    background-color:rgba(51, 51, 51, 0.445);
+    background-color:rgba(73, 73, 73, 0.445);
 }
 .bottom-left-group , .bottom-right-group{
     height: 100%;

@@ -13,9 +13,6 @@ Mousetrap.bind(['ctrl+-'], function() {
 Mousetrap.bind(['ctrl+='], function() {
     zoomIn();
 })
-Mousetrap.bind(['ctrl+t'], function() {
-    remote.shell.openPath('cmd.exe')
-});
 
 // EDITOR SHORCUT KEY
 editor.commands.addCommand({
@@ -32,13 +29,7 @@ editor.commands.addCommand({
     },
     bindKey: {mac: "ctrl-s", win: "ctrl-s"}
 })
-editor.commands.addCommand({
-    name: "terminal",
-    exec: function() {
-        remote.shell.openPath('cmd.exe')
-    },
-    bindKey: {mac: "ctrl-t", win: "ctrl-t"}
-})
+
 editor.commands.addCommand({
     name: "cmdbox",
     exec: function() {

@@ -11,7 +11,7 @@ defaultSettingData = {
     "editorThemeMode": "dark",
     "editorFontSize": "15px",
     "editorLineHeight": "23px",
-    "editorZoom" : "-1",
+    "editorZoom" : "0",
     "editorKeybinding" : 'Prex Code',
   }
 // storage.clear();

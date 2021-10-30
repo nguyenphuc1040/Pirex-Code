@@ -3,13 +3,11 @@ var shell = require('shelljs');
 //#region Command Functions
 function cd(arg){
     shell.cd(arg[0]);
-    if (shell.error() != null){
-        termwindow.append(shell.error() + "\n");
-    }
 }
 
-function clear(){
+function cls(){
     termwindow_.textContent = "";
+    child.stdin.write("\n");
 }
 //#endregion
 
@@ -19,9 +17,10 @@ const commands = [
     "name": "cd",
     "function": cd,
     "description": "Change to given directory. If no directory is given returns to current directory"
-},{
-    "name": "clear",
-    "function": clear,
+},
+{
+    "name": "cls",
+    "function": cls,
     "description": "Clears the terminal"
 },
 ];
